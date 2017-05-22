@@ -1,16 +1,10 @@
 var express = require('express');
 var router = express.Router();
-var userController = require('../controllers/userController')
+var auth = require('../controllers/auth')
 
 /* GET home page. */
-router.get('/api/users', userController.getAll);
+router.post('/signin', auth.userLogin);
 
-router.post('/api/users', userController.createUser);
-
-router.get('/api/users/:id', userController.getOne);
-
-router.put('/api/users/:id', userController.editUser);
-
-router.delete('/api/users/:id', userController.deleteUser);
+router.post('/signup', auth.userRegister)
 
 module.exports = router;
