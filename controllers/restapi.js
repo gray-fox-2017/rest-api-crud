@@ -61,7 +61,30 @@ var updateUser = ((req,res,next) => {
 
 
 var loginUser = ((req,res,next) => {
-  user.find({where:{username: username}})
+  user.find({where:{username: req.body.username}})
+    .then (user => {
+      if (user.username === req.body.username) {
+        bcrypt.compare(req.body.password, user.password)
+          .then ((result) => {
+            if (result) {
+              var token = jwt.sign({username: user.username, role: user.role}, 'THIS-IS-A-FREAKING-SECRET-DONT-TELL-ANYONE');
+              res.send(token);
+            }
+            else {
+              res.send ('Username/password is wrong');
+            }
+          });
+      }
+      else {
+        res.send ('Username/password is wrong');
+      }
+    })
+    .catch(() => {
+      console.log(`CATCH`);
+    });
+});
+
+var authentication = ((req,res,next) => {
 
 });
 
@@ -71,5 +94,6 @@ module.exports = {
   createUser,
   deleteUser,
   updateUser,
-  loginUser
+  loginUser,
+  authentication
 };
