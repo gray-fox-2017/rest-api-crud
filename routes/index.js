@@ -2,16 +2,8 @@ var express = require('express');
 var router = express.Router();
 const restapi = require ('../controllers/restapi');
 
-router.get('/', restapi.getAllUsers);
+router.post('/signin', restapi.signinUser);
 
-router.get('/:id', restapi.getUser);
-
-router.post('/', restapi.createUser);
-
-router.delete('/:id', restapi.deleteUser);
-
-router.put('/:id', restapi.updateUser);
-
-router.post('/login', restapi.loginUser);
+router.post('/signup', restapi.signupUser);
 
 module.exports = router;

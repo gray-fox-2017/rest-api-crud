@@ -20,7 +20,7 @@ var getUser = ((req,res,next) => {
 });
 
 var createUser = ((req,res,next) => {
-  bcrypt.hash(req.body.email, saltRounds, (err,hash) => {
+  bcrypt.hash(req.body.password, saltRounds, (err,hash) => {
     let userData = {
       username: req.body.username,
       password: hash,
@@ -59,11 +59,27 @@ var updateUser = ((req,res,next) => {
     });
 });
 
+var signupUser = ((req,res,next) => {
+  bcrypt.hash(req.body.password, saltRounds, (err,hash) => {
+    let userData = {
+      username: req.body.username,
+      email: req.body.email,
+      password: hash,
+      role: 'customer'
+    };
+    user.create(userData)
+      .then (userData => {
+        res.send(`Signup Success: ${userData}`);
+      });
+  });
+});
 
-var loginUser = ((req,res,next) => {
+var signinUser = ((req,res,next) => {
+  console.log(req.body.username);
   user.find({where:{username: req.body.username}})
     .then (user => {
       if (user.username === req.body.username) {
+        console.log(`username is OK`);
         bcrypt.compare(req.body.password, user.password)
           .then ((result) => {
             if (result) {
@@ -78,14 +94,20 @@ var loginUser = ((req,res,next) => {
       else {
         res.send ('Username/password is wrong');
       }
-    })
-    .catch(() => {
-      console.log(`CATCH`);
     });
 });
 
-var authentication = ((req,res,next) => {
-
+var authorization = ((req,res,next) => {
+  let token = req.headers.token;
+  jwt.verify(token, 'THIS-IS-A-FREAKING-SECRET-DONT-TELL-ANYONE', function(err, decoded) {
+    if (decoded) {
+      if (decoded.role === "admin") next();
+      else res.send('You are not authorized. Poor you.');
+    }
+    if (err) {
+      res.send('You are not authorized. Poor you.');
+    }
+  });
 });
 
 module.exports = {
@@ -94,6 +116,7 @@ module.exports = {
   createUser,
   deleteUser,
   updateUser,
-  loginUser,
-  authentication
+  signupUser,
+  signinUser,
+  authorization
 };
