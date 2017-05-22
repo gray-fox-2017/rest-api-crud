@@ -6,13 +6,19 @@
 
 ### <h6> this app require postman to run </h6>
 
-* __(get)localhost:3000/api/users__: this command will get all of the Users data
+* __https://postmanbasic.herokuapp.com__ : help command
 
-* __(get)localhost:3000/api/users/<user_id>__: this command will find a specific user by their id
+* __https://postmanbasic.herokuapp.com/api/users__: this command will get all of the Users data
 
-* __(post)localhost:3000/api/users__: this command will create a new User
+* __https://postmanbasic.herokuapp.com/api/users/<user_id>__: this command will find a specific user by their id
 
-* __(delete)localhost:3000/api/users/<user_id>__: this command will delete a specific User by their id
+* __https://postmanbasic.herokuapp.com/api/users/signup__: this command will create a new User
 
-* __(put)localhost:3000/api/users/<user_id>__: this command will update a specific user(search by id)
+* __https://postmanbasic.herokuapp.com/api/users/<user_id>__: this command will delete a specific User by their id
+
+* __https://postmanbasic.herokuapp.com/api/users/<user_id>__: this command will update a specific user(search by id)
+
+* __https://postmanbasic.herokuapp.com/api/users/signin__ : this command is use to login
+
+
 
