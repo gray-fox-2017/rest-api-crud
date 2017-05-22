@@ -5,12 +5,14 @@ module.exports = function(sequelize, DataTypes) {
     last_name: DataTypes.STRING,
     dob: DataTypes.DATE,
     username:{
-      type:DataTypes.STRING
+      type:DataTypes.STRING,
+      unique:true
     },
     password:{
       type:DataTypes.STRING,
       allowNull:false
-    }
+    },
+    role: DataTypes.STRING
   }, {
     classMethods: {
       associate: function(models) {
