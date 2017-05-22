@@ -25,3 +25,4 @@ npm install
 npm start
 ```
 Access the website via http://localhost:3000 or API via http://localhost:3000/api/users.
+Access the website via heroku http://rest-crud.herokuapp.com
