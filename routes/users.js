@@ -1,16 +1,23 @@
 var express = require('express');
 var router = express.Router();
-const User = require('../controllers/UserController.js');
+const user_controller = require('../controllers/UserController.js');
 
 /* GET users listing. */
-router.get('/', User.getAllData);
 
-router.get('/:id', User.getDataByID);
+/**/
 
-router.post('/', User.insertUser);
+router.use('/:id', user_controller.auth);
+router.use('/', user_controller.auth);
 
-router.delete('/:id', User.destroyUser);
+router.get('/', user_controller.getAllData);
 
-router.put('/:id',User.editUser);
+router.get('/:id', user_controller.getDataByID);
+
+router.post('/', user_controller.insertUser);
+
+router.delete('/:id', user_controller.destroyUser);
+
+router.put('/:id',user_controller.editUser);
+
 
 module.exports = router;
