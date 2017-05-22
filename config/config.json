@@ -1,0 +1,9 @@
+{
+  "development": {
+    "username": "hakiemaul",
+    "password": "290793",
+    "database": "restapidemo",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  }
+}
