@@ -83,7 +83,7 @@ function signup (req,res,next){
   db.User.create({
     username: req.body.username,
     password: hash,
-    role: 'User'
+    role: 'Admin'
   })
   .then(data=>{
     res.send(data)
