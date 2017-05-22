@@ -1,9 +1,42 @@
 'use strict'
 var models = require('../models')
 var bcrypt = require('bcrypt')
+var jwt = require('jsonwebtoken')
 
 module.exports = {
-
+  signin : (req, res)=>{
+    models.User.findOne({
+      where : {
+        username : req.body.username
+      }
+    })
+    .then((query)=>{
+      if(bcrypt.compareSync(req.body.password, query.dataValues.password)){
+          var token = jwt.sign({
+            first_name : query.dataValues.first_name,
+            last_name : query.dataValues.last_name,
+            username : query.dataValues.username,
+            role : query.dataValues.role
+          }, 'secret', {expiresIn : '1h'})
+          res.send(token)
+      }
+    })
+  },
+  signup : (req, res)=>{
+    models.User.create({
+      first_name : req.body.first_name,
+      last_name : req.body.last_name,
+      username : req.body.username,
+      password : bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10)),
+      role : req.body.role
+    })
+    .then((query)=>{
+      res.send(query)
+    })
+    .catch((err)=>{
+      res.send(err)
+    })
+  },
   getAll : (req, res)=>{
     models.User.findAll()
     .then((query)=>{
@@ -27,7 +60,13 @@ module.exports = {
     })
   },
   insert : (req, res)=>{
-    models.User.create(req.body)
+    models.User.create({
+      first_name : req.body.first_name,
+      last_name : req.body.last_name,
+      username : req.body.username,
+      password : bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10)),
+      role : req.body.role
+    })
     .then((query)=>{
       res.send(query)
     })
@@ -62,7 +101,6 @@ module.exports = {
         updatedAt : new Date()
       })
       .then((result)=>{
-        console.log(result)
         res.send(result)
       })
       .catch((err)=>{
