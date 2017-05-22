@@ -5,7 +5,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       validate:{
         isUnique:(value,next)=>{
-          User.findOne({where:{username:value}})
+          user.findOne({where:{username:value}})
           .then(username=>{
             if(username){
               next('username must be unique')
@@ -23,7 +23,7 @@ module.exports = function(sequelize, DataTypes) {
           message:'input is not an email'
         },
         isUnique:(value,next)=>{
-          User.findOne({where:{email:value}})
+          user.findOne({where:{email:value}})
           .then(email=>{
             if(email){
               next('email must be unique')

@@ -44,6 +44,9 @@ var signup = (req,res)=>{
   .then(user=>{
     res.send(`User created!\n${JSON.stringify(user)}`)
   })
+  .catch(err=>{
+    res.send(err.message)
+  })
 }
 
 var signin = (req,res)=>{
