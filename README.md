@@ -30,8 +30,10 @@ list of filter routes :
 ### Usage
 ##### With only npm:
 
-```npm install 
 ```
+   npm install 
+```
+
 ```
    npm start
 ```
