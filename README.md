@@ -27,3 +27,7 @@ Route | HTTP | Description
 /api/users/:id | DELETE | Delete a user
 /api/users/:id | PUT | Update a user with new info
 
+## HEROKU APP LINK
+http://morning-sands-45224.herokuapp.com/
+
+Fully functional REST API CRUD with authentication and authorization, can be used using Postman app.
