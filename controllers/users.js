@@ -2,6 +2,7 @@
 var models = require('../models')
 var bcrypt = require('bcrypt')
 var jwt = require('jsonwebtoken')
+require('dotenv').config({path: '../'})
 
 module.exports = {
   signin : (req, res)=>{
@@ -17,21 +18,35 @@ module.exports = {
             last_name : query.dataValues.last_name,
             username : query.dataValues.username,
             role : query.dataValues.role
-          }, 'secret', {expiresIn : '1h'})
+          },'secret', {expiresIn : '1h'})
           res.send(token)
       }
     })
   },
   signup : (req, res)=>{
-    models.User.create({
-      first_name : req.body.first_name,
-      last_name : req.body.last_name,
-      username : req.body.username,
-      password : bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10)),
-      role : req.body.role
+    models.User.findOne({
+      where : {
+        username : req.body.username
+      }
     })
     .then((query)=>{
-      res.send(query)
+      if(query){
+        res.send("Username is already exist")
+      }else{
+        query.create({
+          first_name : req.body.first_name,
+          last_name : req.body.last_name,
+          username : req.body.username,
+          password : bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10)),
+          role : req.body.role
+        })
+        .then((query)=>{
+          res.send(query)
+        })
+        .catch((err)=>{
+          res.send(err)
+        })
+      }
     })
     .catch((err)=>{
       res.send(err)
@@ -60,15 +75,29 @@ module.exports = {
     })
   },
   insert : (req, res)=>{
-    models.User.create({
-      first_name : req.body.first_name,
-      last_name : req.body.last_name,
-      username : req.body.username,
-      password : bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10)),
-      role : req.body.role
+    models.User.findOne({
+      where : {
+        username : req.body.username
+      }
     })
     .then((query)=>{
-      res.send(query)
+      if(query){
+        res.send("Username is already exist")
+      }else{
+        query.create({
+          first_name : req.body.first_name,
+          last_name : req.body.last_name,
+          username : req.body.username,
+          password : bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10)),
+          role : req.body.role
+        })
+        .then((query)=>{
+          res.send(query)
+        })
+        .catch((err)=>{
+          res.send(err)
+        })
+      }
     })
     .catch((err)=>{
       res.send(err)

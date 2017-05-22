@@ -1,4 +1,5 @@
 var jwt = require('jsonwebtoken')
+require('dotenv').config({path: '../'})
 
 module.exports = {
   decoded : (req, res, next)=>{
