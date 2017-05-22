@@ -1,9 +1,10 @@
 {
   "development": {
-    "username": "postgress",
-    "password": "postgress",
-    "database": "test",
+    "username": "postgres",
+    "password": "postgres",
+    "database": "rest_api_crud",
     "host": "127.0.0.1",
-    "dialect": "postgresql"
+    "port":"5432",
+    "dialect": "postgres"
   }
 }
