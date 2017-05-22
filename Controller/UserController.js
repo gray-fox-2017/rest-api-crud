@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const saltRounds = 10
 require('dotenv').config()
+const Sequelize = require('sequelize')
 
 function read (req,res,next){
 let decoded = jwt.verify(req.headers.token, process.env.SECRET)
@@ -70,6 +71,9 @@ let decoded = jwt.verify(req.headers.token, process.env.SECRET)
   .then(data=>{
     res.send(data)
     })
+    .catch(Sequelize.ValidationError,function(err){
+      res.send(err.message);
+    })
   }
   else{
     res.send('NOT AUTHORIZED to create a new User!!!!')
@@ -88,6 +92,9 @@ function signup (req,res,next){
   .then(data=>{
     res.send(data)
     })
+  .catch(Sequelize.ValidationError,function(err){
+    res.send(err.message);
+  })
 }
 
 function deleteUser (req,res,next){
