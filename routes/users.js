@@ -2,7 +2,8 @@ var express = require('express');
 var router = express.Router();
 const restapi = require ('../controllers/restapi');
 
-//router.use(restapi.authorization);
+//router.use('/:id',restapi.authorization);
+//router.use('/',restapi.authorization);
 
 router.get('/', restapi.authorization, restapi.getAllUsers);
 router.get('/:id', restapi.authorization, restapi.getUser);

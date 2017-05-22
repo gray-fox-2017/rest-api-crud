@@ -81,7 +81,7 @@ var signinUser = ((req,res,next) => {
         bcrypt.compare(req.body.password, user.password)
           .then ((result) => {
             if (result) {
-              var token = jwt.sign({username: user.username, role: user.role}, 'THIS-IS-A-FREAKING-SECRET-DONT-TELL-ANYONE');
+              var token = jwt.sign({id: user.id, username: user.username, role: user.role}, 'THIS-IS-A-FREAKING-SECRET-DONT-TELL-ANYONE');
               res.send(token);
             }
             else {
@@ -96,21 +96,19 @@ var signinUser = ((req,res,next) => {
 });
 
 var authorization = ((req,res,next) => {
+  console.log(`authorization`);
   let token = req.headers.token;
   jwt.verify(token, 'THIS-IS-A-FREAKING-SECRET-DONT-TELL-ANYONE', function(err, decoded) {
-    if (decoded) {
-      if (decoded.role === "admin") next();
-      else {
-        let id = req.params.id;
-        user.findById(id)
-          .then (user => {
-            if (user.username === decoded.username) next();
-            else (res.send(`You are not authorized`));
-          })
-          .catch (err => {
-            res.send(`You are not authorized`);
-          });
-      }
+    if (decoded.role === "admin") next();
+    else {
+      user.findById(id)
+        .then (user => {
+          if (user.username === decoded.username) next();
+          else (res.send(`You are not authorized`));
+        })
+        .catch (err => {
+          res.send(`You are not authorized`);
+        });
     }
     if (err) {
       res.send('Token is invalid');
