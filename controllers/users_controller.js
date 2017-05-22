@@ -21,7 +21,6 @@ function createUser(req, res) {
     gender : req.body.gender,
     age : req.body.age,
     address : req.body.address,
-    phone : req.body.phone,
     email : req.body.email
   })
   .then(() => res.send(`Create user success!!`))
@@ -46,7 +45,6 @@ function updateUser(req, res) {
       gender : req.body.gender || student.gender,
       age : req.body.age || student.age,
       address : req.body.address || student.address,
-      phone : req.body.phone || student.phone,
       email : req.body.email || student.email
     }, {
       where: {
