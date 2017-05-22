@@ -32,9 +32,6 @@ list of filter routes :
 
 ```
    npm install 
-```
-
-```
    npm start
 ```
 
