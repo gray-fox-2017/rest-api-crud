@@ -23,11 +23,11 @@ With only npm:
 
 ### Access the website via 
 ```
-[localhost:3000] (localhost:3000)
+[localhost:3000](localhost:3000)
 ```
 ### or API via
 ```
-[localhost:3000/api] (localhost:3000/api)
+[localhost:3000/api](localhost:3000/api)
 ```
 
 
