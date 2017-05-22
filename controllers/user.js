@@ -6,16 +6,18 @@ var methods = {}
 
 methods.signup = (req, res) => {
   var saltRounds = 10
-  bcrypt.hash(req.body.password, saltRounds)
-  .then(hash => {
-    models.User.create({
-      username: req.body.username,
-      password: hash,
-      role: 'admin'
-    })
-    .then(user => {
-      res.send(user)
-    })
+  var hash = bcrypt.hashSync(req.body.password, saltRounds)
+  req.body.password = hash
+  models.User.create({
+    username: req.body.username,
+    password: req.body.password,
+    role: 'user'
+  })
+  .then(user => {
+    res.send(user)
+  })
+  .catch(err => {
+    res.send(err)
   })
 }
 
@@ -90,17 +92,18 @@ methods.update = (req, res) => {
   if (req.user.role == 'admin') {
     models.User.findById(req.params.id)
     .then(user => {
-      var saltRounds = 10
-      bcrypt.hash(req.body.password, saltRounds)
-      .then(function(hash) {
-        user.update({
-          username: req.body.username || user.username,
-          password: hash || user.password,
-          role: req.body.role || user.role
-        })
-        .then(updated => {
-          res.send(updated)
-        })
+      if(req.body.password) {
+        var saltRounds = 10
+        var hash = bcrypt.hashSync(req.body.password, saltRounds)
+        req.body.password = hash
+      }
+      user.update({
+        username: req.body.username || user.username,
+        password: req.body.password || user.password,
+        role: req.body.role || user.role
+      })
+      .then(updated => {
+        res.send(updated)
       })
     })
   } else {
