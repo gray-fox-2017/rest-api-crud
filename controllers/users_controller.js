@@ -37,32 +37,37 @@ var getOneUser = function(req, res) {
 }
 
 var editUser = function(req, res) {
-  db.User.update({
-    name : req.body.name,
-    address : req.body.address,
-    phone : req.body.phone,
-    subject : req.body.subject
-  }, {
-    where : {
-      id : req.params.id
-    }
-  })
+  let id = req.params.id
+  db.User.findById(id)
   .then((users) => {
-    res.send({user : users})
+    db.User.update({
+      name : req.body.name || users.name,
+      address : req.body.address || users.address,
+      phone : req.body.phone || users.phone,
+      subject : req.body.subject || users.subject
+    }, {
+      where : {
+        id : req.params.id
+      }
+    })
+      res.send(`success update info with id : ${users.id}`)
+
   })
-  .catch((err) => {
-    res.send(err)
-  })
+  .catch(err => {res.send(err)})
 }
 
 var deleteUser = function(req, res) {
   let id = req.params.id
   db.User.findById(id)
   .then((users) => {
-    db.User.destroy(users)
-    .then((data) => {
+    db.User.destroy({
+    where : {
+      id : users.id
+    }
+  })
+    // .then((data) => {
       res.send("success delete user!")
-    })
+    // })
     .catch((err) => {
       res.send(err)
     })
