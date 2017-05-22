@@ -31,5 +31,6 @@ app.use('/users', users);
 //   res.status(err.status || 500);
 //   res.render('error');
 // });
+app.listen(3000)
 
 module.exports = app;
