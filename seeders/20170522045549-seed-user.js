@@ -16,15 +16,10 @@ module.exports = {
       username: 'john',
       password: 'john123',
       email: 'john@gmail.com',
+      role: 'admin',
       createdAt: new Date(),
       updatedAt: new Date()
-    }, {
-      username: 'doe',
-      password: 'doe123',
-      email: 'doe@gmail.com',
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }])
+    }], {})
   },
 
   down: function (queryInterface, Sequelize) {
