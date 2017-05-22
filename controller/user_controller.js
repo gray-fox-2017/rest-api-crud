@@ -1,17 +1,65 @@
 var models = require('../models')
 var jwt = require('jsonwebtoken')
+var bcrypt = require('bcrypt')
 
-
+//
 var signin = (req,res) =>{
-  if (req.body.username == "Ambo Dalle" && req.body.password == "123456") {
-    var token = jwt.sign({ username: 'ambo', role: admin }, 'SECRET_KEY')
-    res.send(token);
-  }
+  models.Users.findOne({
+    where : {
+      username : req.body.username
+    }
+  })
+  .then ( function(datauser){
+    console.log('setelah then');
+    console.log(datauser);
+    if (bcrypt.compareSync(req.body.password, datauser.password)) {
+      console.log('Masuk if');
+      var token = jwt.sign({
+        username : datauser.username,
+        role : datauser.role,
+        email : datauser.email
+      }, 'secretuser')
+      res.send(token)
+      }
+
+  })
+  .catch((err) => {
+    res.send(err)
+  })
 }
 
 
-
-
+var SignUp = (req,res) =>{
+  models.Users.findOne({
+    where : {
+      username : req.body.username
+    }
+  })
+  .then( data => {
+    if (data) {
+      res.send("Username sudah ada")
+    } else {
+       models.Users.create({
+        username: req.body.username,
+        password: bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10)),
+        email: req.body.email,
+        role: req.body.role ,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      })
+      .then((data)=>{
+        console.log('ini data ', data);
+        res.send(data)
+      })
+      .catch((err) => {
+        res.send(err)
+      })
+    }
+  })
+  .catch((err) => {
+    console.log(err.message);
+  })
+}
 
 
 
@@ -43,7 +91,7 @@ var findUser = (req,res)=>{
 var createUser = (req,res)=>{
   models.Users.create({
     username : req.body.username,
-    password : req.body.password,
+    password : req.body.bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10)),
     email : req.body.email,
     role : req.body.role
   })
@@ -97,5 +145,6 @@ module.exports =  {
  createUser,
  deleteUser,
  updateUser,
- signin
+ signin,
+ SignUp
 }
