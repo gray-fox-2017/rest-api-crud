@@ -1,51 +1,78 @@
 const db = require('../models');
 const Methods = {
-  createUser: function(req,res) {
+  createUser: function(req, res) {
     db.User.create({
-      username : req.body.username,
-      password : req.body.password,
-      email : req.body.email,
-      fullname : req.body.fullname
-    })
-    .then(function(user) {
-      res.send(`Created user ${user.username} success`)
-    })
-    .catch(function(err) {
-      res.send({msg: `${err.message}`})
-    })
+        username: req.body.username,
+        password: req.body.password,
+        email: req.body.email,
+        fullname: req.body.fullname
+      })
+      .then(function(user) {
+        res.send(`Created user ${user.username} success`)
+      })
+      .catch(function(err) {
+        res.send({
+          msg: `${err.message}`
+        })
+      })
   },
-  getAll: function(req,res) {
+  getAll: function(req, res) {
     db.User.findAll()
-    .then(function(Users) {
-      res.send(Users)
-    })
-    .catch(function (err) {
-      res.send({msg : err.message})
-    })
+      .then(function(Users) {
+        res.send(Users)
+      })
+      .catch(function(err) {
+        res.send({
+          msg: err.message
+        })
+      })
   },
-  getSingle: function(req,res) {
+  getSingle: function(req, res) {
     db.User.findOne({
-      where : {
-        id : req.params.id
-      }
-    })
-    .then(function(user) {
-      res.send(JSON.stringify(user))
-    })
-    .catch(function(err) {
-      res.send({msg: err.message})
-    })
+        where: {
+          id: req.params.id
+        }
+      })
+      .then(function(user) {
+        res.send(JSON.stringify(user))
+      })
+      .catch(function(err) {
+        res.send({
+          msg: err.message
+        })
+      })
   },
-  deleteUser: function(req,res) {
+  deleteUser: function(req, res) {
+    db.User.findOne({
+        where: {
+          id: req.params.id
+        }
+      })
+      .then(function(user) {
+        user.destroy()
+          .then(function() {
+            res.send(`Delete ${user.username} success`)
+          })
+      })
+  },
+  updateUser: function(req,res) {
     db.User.findOne({
       where: {
         id : req.params.id
       }
     })
     .then(function(user) {
-      user.destroy()
+      user.update({
+        username : req.body.username,
+        password : req.body.password,
+        email : req.body.email,
+        fullname : req.body.fullname
+      })
       .then(function() {
-        res.send(`Delete ${user.username} succes`)
+        res.send(`Update user ${user.username} success`)
+      })
+      .catch(function(err) {
+        res.send({msg : err.message})
       })
     })
   }
