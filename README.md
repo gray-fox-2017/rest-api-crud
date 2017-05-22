@@ -1,8 +1,23 @@
 # USER API CRUD
-Demo app with basic REST API.
+Demo app with basic REST API and authentication using jsonwebtoken.
 
 ## REST API
+List of public routes:
+
+Route | HTTP | Description
+------|------|------------
+/api/signup | POST | Create new user (with default role of 'customer')
+/api/signin | POST | Generate token for registered user
+
+
 List of user routes:
+
+Route | HTTP | Description
+------|------|------------
+/api/users/:id | GET | Get his/her respectful user info
+/api/users/:id | PUT | Update his/her respectful user info
+
+List of admin routes:
 
 Route | HTTP | Description
 ------|------|------------
