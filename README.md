@@ -3,6 +3,7 @@ Routes API untuk mendapatkan data berupa json
 
 ## REST API
 List of basic routes:
+
 Route | HTTP | Description
 ------------ | ------------- | -------------
 /api/signup | POST | Sign up with new user info
