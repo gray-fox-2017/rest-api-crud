@@ -12,7 +12,7 @@
 
 * __(get)https://postmanbasic.herokuapp.com/api/users/<user_id>__: this command will find a specific user by their id
 
-* __(post)https://postmanbasic.herokuapp.com/api/users/signup__: this command will create a new User
+* __(post)https://postmanbasic.herokuapp.com/api/signup__: this command will create a new User
 
 * __(delete)https://postmanbasic.herokuapp.com/api/users/<user_id>__: this command will delete a specific User by their id
 

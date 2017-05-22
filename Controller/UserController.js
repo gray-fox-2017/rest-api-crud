@@ -19,7 +19,6 @@ db.User.findAll()
 }
 
 function signin(req,res,next){
-  
   db.User.findOne({
     where:{
       username: req.body.username
