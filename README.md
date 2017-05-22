@@ -17,6 +17,6 @@ With only npm
 
 ```
 npm install
-npm go!
+npm start
 ```
 Access the API via `http://localhost:3000/api`
