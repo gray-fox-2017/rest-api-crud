@@ -3,11 +3,13 @@
 
 |Route | HTTP | Desc
 |---|---|---|
-|/api/users| GET | Get all the users
-|/api/users/:id | GET | Get single user
-|/api/users | POST | Create user
-|/api/users/:id | DELETE | Delete a user
-|/api/users/:id| PUT | Update user
+|/api/users| GET | Get all the users (admin only)
+|/api/users/:id | GET | Get single user (user and admin)
+|/api/users | POST | Create user (admin only)
+|/api/users/:id | DELETE | Delete a user (admin only)
+|/api/users/:id| PUT | Update user (user and admin)
+|/api/signup | POST | Create user with default role user|
+|/api/signin | POST | Return token|
 
 **How to use**
 
