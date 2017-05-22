@@ -28,5 +28,16 @@ module.exports = {
         res.send('This is not your account !')
       }
     })
+  },
+  isUnique: function(req, res, next) {
+    db.User.findOne({ where: {username:req.body.username} })
+      .then(user => {
+        if( user ) {
+          res.send("user sudah ada")
+        } else {
+          next()
+        }
+      })
+      // next()
   }
 }
