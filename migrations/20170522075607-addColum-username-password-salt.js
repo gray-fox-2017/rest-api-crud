@@ -19,14 +19,14 @@ module.exports = {
       ),
       queryInterface.addColumn(
         'Users',
-        'encryptedPassword',
+        'password',
         {
           type: Sequelize.STRING,
         }
       ),
       queryInterface.addColumn(
         'Users',
-        'saltPassword',
+        'role',
         {
           type: Sequelize.STRING,
         }
@@ -44,8 +44,8 @@ module.exports = {
     */
     return [
      queryInterface.removeColumn('Users', 'username'),
-     queryInterface.removeColumn('Users', 'encryptedPassword'),
-     queryInterface.removeColumn('Users', 'saltPassword'),
+     queryInterface.removeColumn('Users', 'Password'),
+     queryInterface.removeColumn('Users', 'role'),
    ];
   }
 };
