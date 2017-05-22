@@ -25,7 +25,7 @@ var createUser = ((req,res,next) => {
   };
   user.create(userData)
     .then ((userData) => {
-      res.send(userData);
+      res.send(`New user is created: ${userData}`);
     });
 });
 
