@@ -13,7 +13,7 @@ db.User.findAll()
     })
   }
   else {
-    res.send('Not Authorized!!')
+    res.send('NOT AUTHORIZED to check all users data !!')
   }
 }
 
@@ -143,7 +143,7 @@ function edit(req,res,next){
 }
 
 function commands(req,res,next){
-  res.send('Use postman to execute the commands\n/api/signup: Sign Up with new user info\n/api/signin: Sign in while get an access token based on credentials\n/api/users: Get all the users info(admin only)\n/api/users/<user_id>: get a single user info (admin,and authenticated user)\n /api/users: Create a user (admin only)\n /api/users/<user_id>: Delete a user (admin only)\n /api/users/<user_id>: Update a user with new info (admin and authenticated User)')
+    res.send('Use postman to execute the commands\n/api/signup: Sign Up with new user info\n/api/signin: Sign in while get an access token based on credentials\n/api/users: Get all the users info(admin only)\n/api/users/user_id: get a single user info (admin,and authenticated user)\n/api/users: Create a user (admin only)\n/api/users/user_id: Delete a user (admin only)\n/api/users/user_id: Update a user with new info (admin and authenticated User)')
 }
 
 module.exports = {
