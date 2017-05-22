@@ -18,7 +18,7 @@
 
 * __(put)https://postmanbasic.herokuapp.com/api/users/<user_id>__: this command will update a specific user(search by id)
 
-* __(post)https://postmanbasic.herokuapp.com/api/users/signin__ : this command is use to login
+* __(post)https://postmanbasic.herokuapp.com/api/signin__ : this command is use to login
 
 
 
