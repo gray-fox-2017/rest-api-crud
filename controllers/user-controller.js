@@ -1,36 +1,21 @@
 'use strict'
 var db = require('../models')
 var jwt = require('jsonwebtoken')
+require('dotenv').config()
 
 var getAllUser = function(req, res){
-  let token = req.headers.token
-  if (token){
-    if(token.role=='admin'){
-      db.User.findAll()
-      .then((users)=>{
-        res.send(users)
-      })
-    } else {
-      res.send('You are not authorized!')
-    }
-  } else {
-    res.send('please signin first')
-  }
+  db.User.findAll()
+  .then((users)=>{
+    res.send(users)
+  })
 }
 
 var getOneUser = function(req, res){
-  let token = req.headers.token
   let id = req.params.id
-  if(token){
-    let decoded = jwt.verify(token, 'SECRET-KEY-123567')
-    if(decoded.id == id){
-      res.send(decoded);
-    } else {
-      res.send('this only for user with ID ' + id)
-    }
-  } else {
-    res.send('please signin first')
-  }
+  db.User.find({where: {'id':id}})
+  .then((user)=>{
+    res.send(user)
+  })
 }
 
 var deleteUser = function(req, res){
@@ -46,13 +31,14 @@ var createUser = function(req, res){
   .then(() => {
     res.send('user added')
   })
+  .catch((err) => res.send(err))
 }
 
 var updateUser = function(req, res){
   var id = req.params.id
   db.User.update(req.body,{where: {"id": id}})
-  .then((user) => {
-    res.send(user)
+  .then(() => {
+    res.send('Data berhasil diupdate')
   })
 }
 

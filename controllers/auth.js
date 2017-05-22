@@ -4,20 +4,23 @@ var bcrypt = require('bcrypt');
 const saltRounds = 10;
 const myPlaintextPassword = 'Password';
 var jwt = require('jsonwebtoken')
+require('dotenv').config()
 
-var tokenUser = function(req, res){
+var signIn = function(req, res){
   let password = req.body.password
   let username = req.body.username
+
   db.User.find({where: {"username": username}})
   .then((user) =>{
     if(user!==null){
       let passwordFlag = bcrypt.compareSync(password, user.password)
       if(username == user.username && passwordFlag == true){
-        let token = jwt.sign({id: user.id, username: user.username, role:user.role, email:user.email}, 'SECRET-KEY-123567');
+        let token = jwt.sign({id: user.id, username: user.username, role:user.role, email:user.email}, process.env.SECRET_KEY);
         res.send(token)
       } else {res.send('You are, not authorized. This is only for ' + user.username )}
     } else {res.send('username not registered')}
   })
+  .catch((err) => res.send(err.message))
 }
 
 var newUser = function(req, res){
@@ -35,9 +38,10 @@ var newUser = function(req, res){
   .then(() => {
     res.send('user added')
   })
+  .catch((err) => res.send(err.message))
 }
 
 module.exports = {
   newUser,
-  tokenUser
+  signIn
 }
