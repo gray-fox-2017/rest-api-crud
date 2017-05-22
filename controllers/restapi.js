@@ -105,7 +105,7 @@ var authorization = ((req,res,next) => {
       else res.send('You are not authorized. Poor you.');
     }
     if (err) {
-      res.send('You are not authorized. Poor you.');
+      res.send('Token is invalid');
     }
   });
 });
