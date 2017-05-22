@@ -11,6 +11,6 @@ app.use('/',(req,res)=>{
 })
 app.use('/api',api)
 
-app.listen(3000,()=>{
+app.listen(process.env.PORT||3000,()=>{
   console.log('udah jalan cuy');
 })
