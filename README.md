@@ -23,16 +23,16 @@ With only npm:
 ```
 
 ## Dependencies
-bcrypt
-body-parser
-cookie-parser
-debug
-dotenv
-express
-jade
-morgan
-nodemon
-pg
-sequelize
-sequelize-cli
-serve-favicon
+- bcrypt
+- body-parser
+- cookie-parser
+- debug
+- dotenv
+- express
+- jade
+- morgan
+- nodemon
+- pg
+- sequelize
+- sequelize-cli
+- serve-favicon
