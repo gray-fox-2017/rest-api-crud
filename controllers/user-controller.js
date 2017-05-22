@@ -24,7 +24,6 @@ var deleteUser = function(req, res){
 }
 
 var createUser = function(req, res){
-  console.log('test controlers');
   db.User.create(req.body)
   .then(() => {
     res.send('user added')
@@ -32,7 +31,8 @@ var createUser = function(req, res){
 }
 
 var updateUser = function(req, res){
-  db.User.create(req.body)
+  var id = req.params.id
+  db.User.update(req.body,{where: {"id": id}})
   .then(() => {
     res.send('user updated')
   })
