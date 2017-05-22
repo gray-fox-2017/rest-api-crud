@@ -15,7 +15,33 @@ var getOneUser = function(req, res){
   })
 }
 
+var deleteUser = function(req, res){
+  var id = req.params.id
+  db.User.destroy({where: {"id": id}})
+  .then(() => {
+    res.send('user deleted')
+  })
+}
+
+var createUser = function(req, res){
+  console.log('test controlers');
+  db.User.create(req.body)
+  .then(() => {
+    res.send('user added')
+  })
+}
+
+var updateUser = function(req, res){
+  db.User.create(req.body)
+  .then(() => {
+    res.send('user updated')
+  })
+}
+
 module.exports = {
   getAllUser,
-  getOneUser
+  getOneUser,
+  deleteUser,
+  createUser,
+  updateUser
 }

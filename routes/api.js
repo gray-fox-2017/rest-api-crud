@@ -6,10 +6,10 @@ router.get('/users', userController.getAllUser)
 
 router.get('/users/:id', userController.getOneUser)
 
-// router.post('/users', userController.createUser)
-//
-// router.post('/users/:id', userController.deleteUser)
-//
-// router.put('/users/:id', userController.updateUser)
+router.post('/users', userController.createUser)
+
+router.delete('/users/:id', userController.deleteUser)
+
+router.put('/users/:id', userController.updateUser)
 
 module.exports = router;
