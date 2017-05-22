@@ -1,9 +1,11 @@
 const db = require('../models');
+var hash = require('object-hash');
+
 const Methods = {
   createUser: function(req, res) {
     db.User.create({
         username: req.body.username,
-        password: req.body.password,
+        password: hash(req.body.password),
         email: req.body.email,
         fullname: req.body.fullname
       })
@@ -64,7 +66,7 @@ const Methods = {
     .then(function(user) {
       user.update({
         username : req.body.username,
-        password : req.body.password,
+        password : hash(req.body.password),
         email : req.body.email,
         fullname : req.body.fullname
       })
