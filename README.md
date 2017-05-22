@@ -13,3 +13,6 @@
 
 1) npm install
 2) npm start (this app use nodemon)
+
+Heroku
+https://rest-api-basic-by-zulfikar.herokuapp.com

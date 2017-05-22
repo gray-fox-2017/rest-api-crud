@@ -7,7 +7,8 @@ const Methods = {
         username: req.body.username,
         password: hash(req.body.password),
         email: req.body.email,
-        fullname: req.body.fullname
+        fullname: req.body.fullname,
+        role: req.body.role
       })
       .then(function(user) {
         res.send(`Created user ${user.username} success`)
@@ -68,7 +69,8 @@ const Methods = {
         username : req.body.username,
         password : hash(req.body.password),
         email : req.body.email,
-        fullname : req.body.fullname
+        fullname : req.body.fullname,
+        role: req.body.role
       })
       .then(function() {
         res.send(`Update user ${user.username} success`)
