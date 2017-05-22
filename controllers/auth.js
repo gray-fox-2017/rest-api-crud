@@ -1,7 +1,11 @@
+require('dotenv').config();
+let sec = process.env.SECRET_KEY;
+
 var db = require('../models')
+
 var bcrypt = require('bcrypt');
 const saltRounds = 10;
-let sec = 'ab1702ndnjs721bAVNJsndsa9ahS';
+
 var jwt = require('jsonwebtoken');
 
 var userLogin = function(req, res, next) {
