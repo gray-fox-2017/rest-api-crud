@@ -30,8 +30,9 @@ list of filter routes :
 ### Usage
 ##### With only npm:
 
-npm install
-npm start
+```npm install 
+   npm start
+```
 
 ### Access the website via 
 
