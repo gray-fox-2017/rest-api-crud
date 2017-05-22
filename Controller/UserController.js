@@ -2,9 +2,10 @@ const db = require('../models')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const saltRounds = 10
+require('dotenv').config()
 
 function read (req,res,next){
-let decoded = jwt.verify(req.headers.token, 'stedykeren')
+let decoded = jwt.verify(req.headers.token, process.env.SECRET)
 if(decoded.role === "Admin"){  
 db.User.findAll()
 .then(data=>{
@@ -25,7 +26,7 @@ function signin(req,res,next){
   })
   .then(data=>{
     if(bcrypt.compare(req.body.password, data.password)){
-      var token = jwt.sign({username: data.username,role: data.role},'stedykeren')
+      var token = jwt.sign({username: data.username,role: data.role},process.env.SECRET)
       res.send(token)
     }
   else{
@@ -36,7 +37,7 @@ function signin(req,res,next){
 
 
 function find(req,res,next){
-let decoded = jwt.verify(req.headers.token, 'stedykeren')
+let decoded = jwt.verify(req.headers.token, process.env.SECRET)
 if(decoded.role === "Admin" || decoded){
   db.User.findOne({
     where:{
@@ -55,7 +56,7 @@ if(decoded.role === "Admin" || decoded){
 
 
 function create (req,res,next){
-let decoded = jwt.verify(req.headers.token, 'stedykeren')
+let decoded = jwt.verify(req.headers.token, process.env.SECRET)
   if(decoded.role === "Admin"){
     
   let salt = bcrypt.genSaltSync(saltRounds)
@@ -90,7 +91,7 @@ function signup (req,res,next){
 }
 
 function deleteUser (req,res,next){
-  let decoded = jwt.verify(req.headers.token, 'stedykeren')
+  let decoded = jwt.verify(req.headers.token, process.env.SECRET)
   if(decoded.role === "Admin"){
   db.User.destroy({
     where:{
@@ -107,7 +108,7 @@ function deleteUser (req,res,next){
 }
 
 function deleteUser (req,res,next){
-  let decoded = jwt.verify(req.headers.token, 'stedykeren')
+  let decoded = jwt.verify(req.headers.token, process.env.SECRET)
   if(decoded.role === "Admin"){
   db.User.destroy({
     where:{
@@ -125,7 +126,7 @@ function deleteUser (req,res,next){
 
 
 function edit(req,res,next){
-  let decoded = jwt.verify(req.headers.token, 'stedykeren')
+  let decoded = jwt.verify(req.headers.token, process.env.SECRET)
   if(decoded.role === "Admin" || decoded){
   db.User.update(req.body,{
     where:{
