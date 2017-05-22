@@ -8,17 +8,17 @@
 
 * __https://postmanbasic.herokuapp.com__ : help command
 
-* __https://postmanbasic.herokuapp.com/api/users__: this command will get all of the Users data
+* __(get)https://postmanbasic.herokuapp.com/api/users__: this command will get all of the Users data
 
-* __https://postmanbasic.herokuapp.com/api/users/<user_id>__: this command will find a specific user by their id
+* __(get)https://postmanbasic.herokuapp.com/api/users/<user_id>__: this command will find a specific user by their id
 
-* __https://postmanbasic.herokuapp.com/api/users/signup__: this command will create a new User
+* __(post)https://postmanbasic.herokuapp.com/api/users/signup__: this command will create a new User
 
-* __https://postmanbasic.herokuapp.com/api/users/<user_id>__: this command will delete a specific User by their id
+* __(delete)https://postmanbasic.herokuapp.com/api/users/<user_id>__: this command will delete a specific User by their id
 
-* __https://postmanbasic.herokuapp.com/api/users/<user_id>__: this command will update a specific user(search by id)
+* __(put)https://postmanbasic.herokuapp.com/api/users/<user_id>__: this command will update a specific user(search by id)
 
-* __https://postmanbasic.herokuapp.com/api/users/signin__ : this command is use to login
+* __(post)https://postmanbasic.herokuapp.com/api/users/signin__ : this command is use to login
 
 
 
