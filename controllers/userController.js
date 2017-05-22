@@ -87,7 +87,12 @@ var getById = (req,res)=>{
   })
 }
 var create = (req,res)=>{
-  db.user.create(req.body)
+  db.user.create({
+    username:req.body.username,
+    email:req.body.email,
+    password: bcrypt.hashSync(req.body.password,10),
+    role:req.body.role
+  })
   .then(user=>{
     res.send(`User created!\n${JSON.stringify(user)}`)
   })
@@ -115,7 +120,7 @@ var updateById = (req,res)=>{
       role: req.body.role || user.role,
     })
     .then(updateduser=>{
-      res.send(`User updated!\n${updateduser}`)
+      res.send(`User updated!\n${JSON.stringify(updateduser)}`)
     })
   })
 }
