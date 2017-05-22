@@ -1,5 +1,6 @@
 const db = require('../models');
 var hash = require('object-hash');
+var jwt = require('jsonwebtoken')
 
 const Methods = {
   createUser: function(req, res) {
@@ -79,6 +80,37 @@ const Methods = {
         res.send({msg : err.message})
       })
     })
+  },
+  signIn: function(req,res) {
+    db.User.findOne({
+      where : {
+        username: req.body.username
+      }
+    })
+    .then(function(user) {
+        if (user.password === hash(req.body.password)) {
+          res.send(jwt.sign({username : user.username, role : user.role},'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'))
+        } else {
+          res.send({msg: `Password unmatch for username ${user.username}`})
+        }
+    })
+  },
+  signUp: function(req,res) {
+    db.User.create({
+        username: req.body.username,
+        password: hash(req.body.password),
+        email: req.body.email,
+        fullname: req.body.fullname,
+        role: "user"
+      })
+      .then(function(user) {
+        res.send(`Created user ${user.username} success`)
+      })
+      .catch(function(err) {
+        res.send({
+          msg: `${err.message}`
+        })
+      })
   }
 }
 
