@@ -1,6 +1,6 @@
 # rest-api-crud
 
-#<h2>this is an app to get a spesific Users data</h2>
+#<h2>this is an app to get a specific Users data</h2>
 
 ##<h4>Commands: </h4>
 
