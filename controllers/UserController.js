@@ -88,9 +88,10 @@ const destroyUser = (req,res) => {
 
 const editUser = (req,res) => {
   let id = req.params.id;
+  let password = CryptoJS.AES.encrypt(req.body.password,SALT).toString();
   let newUser = {
     username : req.body.username,
-    password : req.body.password,
+    password : password,
     role: req.body.role,
     email:req.body.email
   }

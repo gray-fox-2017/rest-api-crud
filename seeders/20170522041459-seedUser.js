@@ -13,10 +13,10 @@ module.exports = {
       }], {});
     */
     return queryInterface.bulkInsert('Users', [
-      {username:'poppy',password:'pass',email:'psari@gmail.com',role:'admin',createdAt:new Date(),updatedAt:new Date()},
-      {username:'admin',password:'pass',email:'admin@gmail.com',role:'admin',createdAt:new Date(),updatedAt:new Date()},
-      {username:'spv',password:'pass',email:'spv@gmail.com',role:'spv',createdAt:new Date(),updatedAt:new Date()},
-      {username:'user',password:'pass',email:'user@gmail.com',role:'user',createdAt:new Date(),updatedAt:new Date()}
+      {username:'poppy',password:'U2FsdGVkX1+WtktyUUoz2koJH3HZ/T4CqFjp+ZUEOXY=',email:'psari@gmail.com',role:'admin',createdAt:new Date(),updatedAt:new Date()},
+      {username:'admin',password:'U2FsdGVkX1+WtktyUUoz2koJH3HZ/T4CqFjp+ZUEOXY=',email:'admin@gmail.com',role:'admin',createdAt:new Date(),updatedAt:new Date()},
+      {username:'spv',password:'U2FsdGVkX1+WtktyUUoz2koJH3HZ/T4CqFjp+ZUEOXY=',email:'spv@gmail.com',role:'spv',createdAt:new Date(),updatedAt:new Date()},
+      {username:'user',password:'U2FsdGVkX1+WtktyUUoz2koJH3HZ/T4CqFjp+ZUEOXY=',email:'user@gmail.com',role:'user',createdAt:new Date(),updatedAt:new Date()}
     ], {});
   },
 
