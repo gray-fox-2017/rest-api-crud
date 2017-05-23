@@ -9,8 +9,8 @@ Heroku</a>
 
 | Route | HTTP | Description |
 | ----- |:-----:| --------|
-| <span style="color:red">/api/users </span> | GET | Get all Users (admin only) |
-| <span style="color:red">/api/users/:id</span> | GET | Get User By ID (admin & authenticated user) |
+| `/api/users`| GET | Get all Users (admin only) |
+| `api/users/:id` | GET | Get User By ID (admin & authenticated user) |
 | <span style="color:red">/api/users/:id</span> | DELETE | Delete User By ID (admin only) |
 | <span style="color:red">/api/users/:id</span> | PUT | Edit User By ID (admin & authenticated user) |
 | /api/users/signup | POST | Sign up with new user info |
