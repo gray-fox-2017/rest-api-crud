@@ -26,14 +26,14 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: {
         args: false,
-        message: 'Username should not be null'
+        message: 'Email should not be null'
       },
       validate: {
         isUnique: function(value, next) {
           user.find({where: {username: value}})
             .then((user) => {
               if(user && this.id !== user.id) {
-                return next('Username already exists');
+                return next('Email already exists');
               }
               return next();
             })
@@ -51,7 +51,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: {
         args: false,
-        message: 'Username should not be null'
+        message: 'Password should not be null'
       },
     },
     role: DataTypes.STRING

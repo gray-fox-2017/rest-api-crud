@@ -70,6 +70,9 @@ var signupUser = ((req,res,next) => {
     user.create(userData)
       .then (userData => {
         res.send(`Signup Success: ${userData}`);
+      })
+      .catch (err => {
+        res.send(err.message);
       });
   });
 });
