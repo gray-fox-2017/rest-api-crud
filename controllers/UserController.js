@@ -89,15 +89,17 @@ const destroyUser = (req,res) => {
 const editUser = (req,res) => {
   let id = req.params.id;
   let password = CryptoJS.AES.encrypt(req.body.password,SALT).toString();
+
   let newUser = {
     username : req.body.username,
     password : password,
-    role: req.body.role,
     email:req.body.email
   }
 
   User.findById(id)
   .then( (user) => {
+
+    if (user.role === 'admin') newUser.role = req.body.role,
     user.update(newUser)
     .then( () => {res.send(`${id} UPDATED`)})
     .catch((err) => {res.send(err)} );

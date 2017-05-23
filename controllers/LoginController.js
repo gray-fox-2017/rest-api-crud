@@ -28,6 +28,9 @@ const signin = (req,res,next) => {
   })
   .then((user)=>{
     var plainpass = CryptoJS.AES.decrypt(user.password.toString(), SALT).toString(CryptoJS.enc.Utf8);
+
+    // var plainpass = CryptoJS.AES.decrypt('U2FsdGVkX1+WtktyUUoz2koJH3HZ/T4CqFjp+ZUEOXY=', SALT).toString(CryptoJS.enc.Utf8);
+    // console.log(plainpass)
     if (password == plainpass ) {
       let userDt = {
         username : user.username,
