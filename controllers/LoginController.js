@@ -11,7 +11,7 @@ const signup = (req,res,next) => {
   let userData = {
     username : req.body.username,
     password : password,
-    role: req.body.role,
+    role: 'user',
     email:req.body.email
   }
   User.create(userData)

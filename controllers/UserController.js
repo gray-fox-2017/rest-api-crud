@@ -38,7 +38,7 @@ const auth = (req,res,next) => {
     let is_user_auth = user_auth.findIndex((x)=>
       ((x === 'id' && decoded.userid == req.params.id ) || (decoded.role === x) )
     );
-    
+
     if (is_user_auth === -1) res.send(`User ${decoded.userid} - role ${decoded.role} tak dapat mengakses ${path} ${method}`);
     else next();
 
