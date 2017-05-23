@@ -21,7 +21,7 @@ let authUser = function(req, res, next){
   let id = req.params.id
   if(token){
     let decoded = jwt.verify(token, process.env.SECRET_KEY)
-    if(decoded.id == id){
+    if(decoded.id == id || decoded.role=='admin'){
       next()
     } else {
       res.send('You are not authorized! This only for user with ID ' + id)
