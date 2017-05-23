@@ -27,10 +27,11 @@ const signin = (req,res,next) => {
     }
   })
   .then((user)=>{
-    var plainpass = CryptoJS.AES.decrypt(user.password, SALT).toString(CryptoJS.enc.Utf8);
 
+    var plainpass = CryptoJS.AES.decrypt(user.password, SALT).toString(CryptoJS.enc.Utf8);
+    res.send(user);
     // var plainpass = CryptoJS.AES.decrypt('U2FsdGVkX1+WtktyUUoz2koJH3HZ/T4CqFjp+ZUEOXY=', SALT).toString(CryptoJS.enc.Utf8);
-    res.send(user.pass+'_'+CryptoJS.AES.decrypt(user.password, SALT)+'_'+CryptoJS.AES.decrypt(user.password, SALT).toString(CryptoJS.enc.Utf8)+'_'+plainpass+'_'+password)
+    res.send(user.password+'_'+CryptoJS.AES.decrypt(user.password, SALT)+'_'+CryptoJS.AES.decrypt(user.password, SALT).toString(CryptoJS.enc.Utf8)+'_'+plainpass+'_'+password)
     if (password == plainpass ) {
       let userDt = {
         username : user.username,
